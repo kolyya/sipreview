@@ -6,6 +6,8 @@ import JSZip, { JSZipObject } from 'jszip';
 class Main {
     constructor() {
         const $result = $('#jsFileLoading');
+        const $gameRoundsNav = $('#jsGameRoundsNav');
+        const $gameRounds = $('#jsGameRounds');
 
         $('#file').on('change', function (e) {
             // Closure to capture the file information.
@@ -31,8 +33,43 @@ class Main {
 
                                     $('#jsGameName').html($package.attr('name'));
                                     $('#jsGameDate').html($package.attr('date'));
-                                    $('#jsGameId').html($package.attr('version'));
-                                    $('#jsGameVersion').html($package.attr('id'));
+                                    $('#jsGameVersion').html($package.attr('version'));
+                                    $('#jsGameId').html($package.attr('id'));
+
+                                    $package.find('round').each(function (i: number) {
+                                        // tab
+                                        $('<a>', {
+                                            'class': 'nav-link' + (i === 0 ? ' active' : ''),
+                                            'html': $(this).attr('name'),
+                                            'data-toggle': 'tab',
+                                            'href': '#round' + i,
+                                        }).appendTo($('<li>', {
+                                            'class': 'nav-item',
+                                        }).appendTo($gameRoundsNav));
+
+                                        // content
+                                        const $round = $('<div>', {
+                                            'class': 'tab-pane fade' + (i === 0 ? ' active show' : ''),
+                                            'id': 'round' + i,
+                                        });
+
+                                        const $table = $('<table>', {
+                                            'class': 'table',
+                                        }).appendTo($round);
+
+                                        $(this).find('themes').find('theme').each(function (j: number) {
+                                            const $tr = $('<tr>', {});
+
+                                            $('<td>', {
+                                                'html': $(this).attr('name'),
+                                            }).appendTo($tr);
+
+                                            $tr.appendTo($table);
+                                        });
+
+                                        $round.appendTo($gameRounds);
+                                    });
+
                                 });
                             }
 

@@ -5,7 +5,7 @@
     <title>SIPreview</title>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <h1>SIPreview</h1>
 
     <div class="file">
@@ -24,7 +24,17 @@
             <div class="game-header__child">Версия: <strong id="jsGameVersion"></strong></div>
             <div class="game-header__child">Id: <strong id="jsGameId"></strong></div>
         </div>
-        <div class="game__content"></div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="game__content">
+                    <div>
+                        <ul id="jsGameRoundsNav" class="nav nav-tabs"></ul>
+                        <div id="jsGameRounds" class="tab-content"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
     </div>
 
 </div>
