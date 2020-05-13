@@ -1,5 +1,8 @@
 'use strict';
 
-let text: string = 'Hello World';
+import $ from 'jquery';
+import Main from './Components/Main';
 
-console.log(text);
+$(function () {
+    new Main();
+});
