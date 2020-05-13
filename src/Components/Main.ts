@@ -83,7 +83,34 @@ class Main {
                                                             'html': themeName + ', ' + questionPrice,
                                                         }).appendTo($gameQuestion);
 
-                                                        // todo: вывод вопроса
+                                                        // тип вопроса и параметры
+                                                        if ($question.find('type').length >= 1) {
+                                                            $('<div>', {
+                                                                'html': 'Тип вопроса: ' + $question.find('type')
+                                                                    .attr('name'),
+                                                            }).appendTo($gameQuestion);
+
+                                                            let $params = $('<div>', {
+                                                                'html': '',
+                                                            }).appendTo($gameQuestion);
+
+                                                            $question.find('type').find('param').each(function () {
+                                                                $('<span>', {
+                                                                    'html': $(this).html() + ' ',
+                                                                }).appendTo($params);
+                                                            });
+
+                                                        }
+
+                                                        // вывод вопроса
+                                                        $question.find('scenario').find('atom').each(function (l: number) {
+                                                            let $atom = $(this);
+                                                            // todo: обрабатывать картинки и звук
+                                                            $('<div>', {
+                                                                'html': $atom.html(),
+                                                            }).appendTo($gameQuestion);
+                                                        });
+
 
                                                         // ответ
                                                         $('<div>', {
