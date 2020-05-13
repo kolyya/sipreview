@@ -3,20 +3,31 @@
 <head>
     <meta charset="utf-8">
     <title>SIPreview</title>
-
 </head>
 <body>
-<h1>SIPreview</h1>
+<div class="container">
+    <h1>SIPreview</h1>
 
-<h3>Choose the local(s) zip file(s)</h3>
-<p class="note">Note : your browser will process the zip file, don't choose a file too big !</p>
-<input type="file" id="file" name="file" multiple /><br />
+    <div class="file">
+        <div class="custom-file">
+            <input type="file" id="file" name="file" class="custom-file-input"/>
+            <label class="custom-file-label" for="file">Выберите файл (.siq)</label>
+        </div>
 
-<div id="result_block" class="hidden">
-    <h3>Content :</h3>
-    <div id="result"></div>
+        <div class="file-loading" id="jsFileLoading"></div>
+    </div>
+
+    <div id="game" class="game">
+        <div class="game__header game-header">
+            <div class="game-header__child">Название: <strong id="jsGameName"></strong></div>
+            <div class="game-header__child">Дата создания: <strong id="jsGameDate"></strong></div>
+            <div class="game-header__child">Версия: <strong id="jsGameVersion"></strong></div>
+            <div class="game-header__child">Id: <strong id="jsGameId"></strong></div>
+        </div>
+        <div class="game__content"></div>
+    </div>
+
 </div>
-
 <script src="./dist/app.js"></script>
 </body>
 </html>

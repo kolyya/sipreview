@@ -1,39 +1,45 @@
 'use strict';
 
 import $ from 'jquery';
-import JSZip from 'jszip';
+import JSZip, { JSZipObject } from 'jszip';
 
 class Main {
     constructor() {
-        const $result = $('#result');
-        $('#file').on('change', function (evt) {
-            // remove content
-            $result.html('');
-            // be sure to show the results
-            $('#result_block').removeClass('hidden').addClass('show');
+        const $result = $('#jsFileLoading');
 
+        $('#file').on('change', function (e) {
             // Closure to capture the file information.
             function handleFile(f: any) {
                 const $title = $('<h4>', {
-                    text: f.name
+                    text: 'Выбран файл: ' + f.name,
                 });
-                const $fileContent = $('<ul>');
                 $result.append($title);
-                $result.append($fileContent);
 
                 const dateBefore: any = new Date();
                 JSZip.loadAsync(f)                                   // 1) read the Blob
-                    .then(function (zip) {
+                    .then(function (zip: JSZip) {
                         const dateAfter: any = new Date();
                         $title.append($('<span>', {
                             'class': 'small',
                             text: ' (loaded in ' + (dateAfter - dateBefore) + 'ms)'
                         }));
 
-                        zip.forEach(function (relativePath, zipEntry) {  // 2) print entries
-                            $fileContent.append($('<li>', {
-                                text: zipEntry.name
-                            }));
+                        zip.forEach(function (relativePath: string, zipEntry: JSZipObject) {  // 2) print entries
+                            if ('content.xml' === zipEntry.name) {
+                                zipEntry.async('text').then((txt) => {
+                                    const $package: any = $($.parseXML(txt.trim())).find('package');
+
+                                    $('#jsGameName').html($package.attr('name'));
+                                    $('#jsGameDate').html($package.attr('date'));
+                                    $('#jsGameId').html($package.attr('version'));
+                                    $('#jsGameVersion').html($package.attr('id'));
+                                });
+                            }
+
+
+                            // $fileContent.append($('<li>', {
+                            //     text: zipEntry.name
+                            // }));
                         });
                     }, function (e) {
                         $result.append($('<div>', {
@@ -43,7 +49,7 @@ class Main {
                     });
             }
 
-            const files = evt.target.files;
+            const files = e.target.files;
             for (let i = 0; i < files.length; i++) {
                 handleFile(files[i]);
             }
