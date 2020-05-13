@@ -8,6 +8,7 @@ class Main {
         const $result = $('#jsFileLoading');
         const $gameRoundsNav = $('#jsGameRoundsNav');
         const $gameRounds = $('#jsGameRounds');
+        const $gameQuestion = $('#jsGameQuestion');
 
         $('#file').on('change', function (e) {
             // Closure to capture the file information.
@@ -54,15 +55,45 @@ class Main {
                                         });
 
                                         const $table = $('<table>', {
-                                            'class': 'table',
+                                            'class': 'table table-hover',
                                         }).appendTo($round);
 
                                         $(this).find('themes').find('theme').each(function (j: number) {
                                             const $tr = $('<tr>', {});
+                                            let themeName = $(this).attr('name');
 
+                                            // название темы
                                             $('<td>', {
-                                                'html': $(this).attr('name'),
+                                                'html': themeName,
                                             }).appendTo($tr);
+
+                                            // questions
+                                            $(this).find('questions').find('question').each(function (k: number) {
+                                                let $question = $(this);
+                                                let questionPrice = $(this).attr('price');
+
+                                                $('<td>', {
+                                                    'class': 'question-cell',
+                                                    'html': questionPrice,
+                                                    click: function (e: any) {
+                                                        $gameQuestion.html('');
+
+                                                        // тема, стоимость
+                                                        $('<h4>', {
+                                                            'html': themeName + ', ' + questionPrice,
+                                                        }).appendTo($gameQuestion);
+
+                                                        // todo: вывод вопроса
+
+                                                        // ответ
+                                                        $('<div>', {
+                                                            'html': 'Ответ: ' + $question.find('right')
+                                                                .find('answer')
+                                                                .html(),
+                                                        }).appendTo($gameQuestion);
+                                                    },
+                                                }).appendTo($tr);
+                                            })
 
                                             $tr.appendTo($table);
                                         });

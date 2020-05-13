@@ -15,3 +15,11 @@
     }
   }
 }
+
+.question-cell {
+  cursor: pointer;
+
+  &:hover {
+    background-color: $gray-300;
+  }
+}
