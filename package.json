@@ -1,0 +1,17 @@
+{
+  "name": "sipreview",
+  "private": true,
+  "main": "src/app.ts",
+  "scripts": {
+    "build": "webpack --env.production",
+    "watch": "webpack --env.development --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^13.13.5",
+    "ts-loader": "^7.0.4",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
