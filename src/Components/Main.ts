@@ -6,13 +6,18 @@ import ContentXml from './ContentXml';
 
 class Main {
     private $result: JQuery;
-    private cx: ContentXml;
+    private CX: ContentXml;
+    private data: { [key: string]: string } = {};
 
     constructor() {
         const _this = this;
 
         this.$result = $('#jsFileLoading');
-        this.cx = new ContentXml();
+        this.CX = new ContentXml({
+            get_data: function (key: string) {
+                return _this.data[key];
+            },
+        });
 
         $('#file').on('change', function (e: any) {
 
@@ -41,15 +46,15 @@ class Main {
                 }));
 
                 zip.forEach(function (relativePath: string, zipEntry: JSZipObject) {  // 2) print entries
-                    if (zipEntry.name.startsWith('Images')) {
+                    if (zipEntry.name.startsWith('Images/')) {
                         zipEntry.async('base64').then((txt) => {
-                            // console.log(zipEntry, txt);
+                            _this.data[zipEntry.name] = txt;
                         });
                     }
 
                     if ('content.xml' === zipEntry.name) {
                         zipEntry.async('text').then((txt: string) => {
-                            _this.cx.parse(txt);
+                            _this.CX.parse(txt);
                         });
                     }
                 });

@@ -7,7 +7,7 @@ class ContentXml {
     private $gameRounds: JQuery;
     private $gameQuestion: JQuery;
 
-    constructor() {
+    constructor(public options: { get_data: any }) {
         this.$gameRoundsNav = $('#jsGameRoundsNav');
         this.$gameRounds = $('#jsGameRounds');
         this.$gameQuestion = $('#jsGameQuestion');
@@ -136,9 +136,21 @@ class ContentXml {
                     $question.find('scenario').find('atom').each(function () {
                         const $atom = $(this);
                         // todo: обрабатывать картинки и звук
-                        $('<div>', {
-                            'html': $atom.html(),
-                        }).appendTo(_this.$gameQuestion);
+                        if ('image' === $atom.attr('type')) {
+                            const html = $atom.html();
+
+                            $('<img>', {
+                                'src': 'data:image/jpeg;charset=utf-8;base64, ' + _this.options.get_data('Images/' + html.substr(1)),
+                                'alt': html,
+                                'title': html,
+                                'width': '100%',
+                            }).appendTo(_this.$gameQuestion);
+                        } else {
+                            $('<div>', {
+                                'html': $atom.html(),
+                            }).appendTo(_this.$gameQuestion);
+                        }
+
                     });
 
 
