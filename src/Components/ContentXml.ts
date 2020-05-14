@@ -102,8 +102,10 @@ class ContentXml {
             const $question = $(this);
             const questionPrice = $(this).attr('price');
 
+            const $type = $question.find('type');
+
             $('<td>', {
-                'class': 'question-cell',
+                'class': 'question-cell' + ($type.length ? ' question-cell_star' : ''),
                 'html': questionPrice,
                 click: function () {
                     _this.$gameQuestion.html('');
@@ -114,9 +116,9 @@ class ContentXml {
                     }).appendTo(_this.$gameQuestion);
 
                     // тип вопроса и параметры
-                    if ($question.find('type').length >= 1) {
+                    if ($type.length >= 1) {
                         $('<div>', {
-                            'html': 'Тип вопроса: ' + $question.find('type')
+                            'html': 'Тип вопроса: ' + $type
                                 .attr('name'),
                         }).appendTo(_this.$gameQuestion);
 
@@ -124,7 +126,7 @@ class ContentXml {
                             'html': '',
                         }).appendTo(_this.$gameQuestion);
 
-                        $question.find('type').find('param').each(function () {
+                        $type.find('param').each(function () {
                             $('<span>', {
                                 'html': $(this).html() + ' ',
                             }).appendTo($params);

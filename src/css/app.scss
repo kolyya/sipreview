@@ -17,7 +17,15 @@
 }
 
 .question-cell {
+  position: relative;
   cursor: pointer;
+
+  &_star::after {
+    content: '*';
+    position: absolute;
+    top: 4px;
+    right: 4px;
+  }
 
   &:hover {
     background-color: $gray-300;
