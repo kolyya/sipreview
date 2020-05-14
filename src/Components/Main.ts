@@ -58,9 +58,9 @@ class Main {
                                             'class': 'table table-hover',
                                         }).appendTo($round);
 
-                                        $(this).find('themes').find('theme').each(function (j: number) {
+                                        $(this).find('themes').find('theme').each(function () {
                                             const $tr = $('<tr>', {});
-                                            let themeName = $(this).attr('name');
+                                            const themeName = $(this).attr('name');
 
                                             // название темы
                                             $('<td>', {
@@ -68,14 +68,14 @@ class Main {
                                             }).appendTo($tr);
 
                                             // questions
-                                            $(this).find('questions').find('question').each(function (k: number) {
-                                                let $question = $(this);
-                                                let questionPrice = $(this).attr('price');
+                                            $(this).find('questions').find('question').each(function () {
+                                                const $question = $(this);
+                                                const questionPrice = $(this).attr('price');
 
                                                 $('<td>', {
                                                     'class': 'question-cell',
                                                     'html': questionPrice,
-                                                    click: function (e: any) {
+                                                    click: function () {
                                                         $gameQuestion.html('');
 
                                                         // тема, стоимость
@@ -90,7 +90,7 @@ class Main {
                                                                     .attr('name'),
                                                             }).appendTo($gameQuestion);
 
-                                                            let $params = $('<div>', {
+                                                            const $params = $('<div>', {
                                                                 'html': '',
                                                             }).appendTo($gameQuestion);
 
@@ -103,8 +103,8 @@ class Main {
                                                         }
 
                                                         // вывод вопроса
-                                                        $question.find('scenario').find('atom').each(function (l: number) {
-                                                            let $atom = $(this);
+                                                        $question.find('scenario').find('atom').each(function () {
+                                                            const $atom = $(this);
                                                             // todo: обрабатывать картинки и звук
                                                             $('<div>', {
                                                                 'html': $atom.html(),
@@ -120,7 +120,7 @@ class Main {
                                                         }).appendTo($gameQuestion);
                                                     },
                                                 }).appendTo($tr);
-                                            })
+                                            });
 
                                             $tr.appendTo($table);
                                         });
