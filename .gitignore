@@ -6,3 +6,4 @@ node_modules
 
 # generated
 docs/build
+!docs/build/.gitignore
