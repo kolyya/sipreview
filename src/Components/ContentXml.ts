@@ -140,10 +140,17 @@ class ContentXml {
                             const html = $atom.html();
 
                             $('<img>', {
-                                'src': 'data:image/jpeg;charset=utf-8;base64, ' + _this.options.get_data('Images/' + html.substr(1)),
+                                'src': 'data:image/jpeg;charset=utf-8;base64, ' + _this.options.get_data('Images/' + encodeURI(html).substr(1)),
                                 'alt': html,
                                 'title': html,
                                 'width': '100%',
+                            }).appendTo(_this.$gameQuestion);
+                        } else if ('voice' === $atom.attr('type')) {
+                            const html = $atom.html();
+
+                            $('<audio>', {
+                                'src': 'data:audio/mp3;charset=utf-8;base64, ' + _this.options.get_data('Audio/' + encodeURI(html).substr(1)),
+                                'controls': true,
                             }).appendTo(_this.$gameQuestion);
                         } else {
                             $('<div>', {

@@ -46,7 +46,7 @@ class Main {
                 }));
 
                 zip.forEach(function (relativePath: string, zipEntry: JSZipObject) {  // 2) print entries
-                    if (zipEntry.name.startsWith('Images/')) {
+                    if (zipEntry.name.startsWith('Images/') || zipEntry.name.startsWith('Audio/')) {
                         zipEntry.async('base64').then((txt) => {
                             _this.data[zipEntry.name] = txt;
                         });
