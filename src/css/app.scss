@@ -23,3 +23,11 @@
     background-color: $gray-300;
   }
 }
+
+.spoiler {
+  opacity: 0.0;
+
+  &:hover {
+    opacity: 1.0;
+  }
+}

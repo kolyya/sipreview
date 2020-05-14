@@ -135,7 +135,7 @@ class ContentXml {
                     // вывод вопроса
                     $question.find('scenario').find('atom').each(function () {
                         const $atom = $(this);
-                        // todo: обрабатывать картинки и звук
+                        // обрабатывать картинки и звук
                         if ('image' === $atom.attr('type')) {
                             const html = $atom.html();
 
@@ -162,11 +162,16 @@ class ContentXml {
 
 
                     // ответ
+                    const $answer = $('<div>', {
+                        'html': '<h5>Ответ<h5>',
+                    }).appendTo(_this.$gameQuestion);
+
                     $('<div>', {
-                        'html': 'Ответ: ' + $question.find('right')
+                        'class': 'spoiler',
+                        'html': $question.find('right')
                             .find('answer')
                             .html(),
-                    }).appendTo(_this.$gameQuestion);
+                    }).appendTo($answer);
                 },
             }).appendTo($tr);
         });
