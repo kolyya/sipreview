@@ -118,8 +118,7 @@ class ContentXml {
                     // тип вопроса и параметры
                     if ($type.length >= 1) {
                         $('<div>', {
-                            'html': 'Тип вопроса: ' + $type
-                                .attr('name'),
+                            'html': 'Тип вопроса: ' + $type.attr('name'),
                         }).appendTo(_this.$gameQuestion);
 
                         const $params = $('<div>', {
@@ -128,7 +127,7 @@ class ContentXml {
 
                         $type.find('param').each(function () {
                             $('<span>', {
-                                'html': $(this).html() + ' ',
+                                'html': $(this).attr('name') + ':' + $(this).html() + ' ',
                             }).appendTo($params);
                         });
 
