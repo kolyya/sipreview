@@ -18,6 +18,10 @@ class ContentXml {
      * @param txt
      */
     parse(txt: string) {
+        this.$gameRoundsNav.html('');
+        this.$gameRounds.html('');
+        this.$gameQuestion.html('');
+
         const $package: any = $($.parseXML(txt.trim())).find('package');
 
         // info

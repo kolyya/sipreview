@@ -20,8 +20,8 @@ class Main {
         });
 
         $('#file').on('change', function (e: any) {
-
             const files = e.target.files;
+            _this.$result.html('');
             for (let i = 0; i < files.length; i++) {
                 _this.handleFile(files[i]);
             }
