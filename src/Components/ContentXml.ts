@@ -18,13 +18,14 @@ class ContentXml {
      * @param txt
      */
     parse(txt: string) {
-        this.$gameRoundsNav.html('');
+        this.$gameRoundsNav.html('').css('display', 'flex');
         this.$gameRounds.html('');
         this.$gameQuestion.html('');
 
         const $package: any = $($.parseXML(txt.trim())).find('package');
 
         // info
+        $('#jsGameHeader').css('display', 'flex');
         $('#jsGameName').html($package.attr('name'));
         $('#jsGameDate').html($package.attr('date'));
         $('#jsGameVersion').html($package.attr('version'));
@@ -121,13 +122,14 @@ class ContentXml {
 
                     // тип вопроса и параметры
                     if ($type.length >= 1) {
-                        $('<div>', {
+                        const $questionType = $('<div>', {
+                            'class': 'question-type',
                             'html': 'Тип вопроса: ' + $type.attr('name'),
                         }).appendTo(_this.$gameQuestion);
 
                         const $params = $('<div>', {
                             'html': '',
-                        }).appendTo(_this.$gameQuestion);
+                        }).appendTo($questionType);
 
                         $type.find('param').each(function () {
                             $('<span>', {
@@ -165,6 +167,7 @@ class ContentXml {
 
                     // ответ
                     const $answer = $('<div>', {
+                        'class': 'answer',
                         'html': '<h5>Ответ<h5>',
                     }).appendTo(_this.$gameQuestion);
 

@@ -9,10 +9,13 @@
 </head>
 <body>
 <div class="container-fluid">
-    <h1>SIPreview</h1>
+    <div class="header" style="display: flex;">
+        <h1>SIPreview</h1>
+        <span class="header__description text-muted">— Предпросмотр пака вопросов для игры SIGame</span>
+    </div>
 
     <div class="file">
-        <div class="custom-file">
+        <div class="file__input custom-file">
             <input type="file" id="file" name="file" class="custom-file-input"/>
             <label class="custom-file-label" for="file">Выберите файл (.siq)</label>
         </div>
@@ -20,8 +23,8 @@
         <div class="file-loading" id="jsFileLoading"></div>
     </div>
 
-    <div id="game" class="game">
-        <div class="game__header game-header">
+    <div class="game">
+        <div id="jsGameHeader" class="game__header game-header">
             <div class="game-header__child">Название: <strong id="jsGameName"></strong></div>
             <div class="game-header__child">Дата создания: <strong id="jsGameDate"></strong></div>
             <div class="game-header__child">Версия: <strong id="jsGameVersion"></strong></div>
@@ -31,7 +34,7 @@
             <div class="col-md-8">
                 <div class="game__content">
                     <div>
-                        <ul id="jsGameRoundsNav" class="nav nav-tabs"></ul>
+                        <ul id="jsGameRoundsNav" class="game-content__tabs nav nav-tabs"></ul>
                         <div id="jsGameRounds" class="tab-content"></div>
                     </div>
                 </div>

@@ -4,15 +4,42 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~bootswatch/dist/cosmo/_bootswatch";
 
+.header {
+  &__description {
+    @extend h4;
+    padding-left: 20px;
+    padding-top: 12px;
+  }
+}
+
+.file {
+  &__input {
+    max-width: 400px;
+  }
+}
+
+.file-loading {
+  margin-top: 10px;
+}
+
 .game {
   &__header {
+    padding: 10px 0;
     display: flex;
   }
 
   .game-header {
+    display: none;
+
     &__child {
       margin-right: 20px;
     }
+  }
+}
+
+.game-content {
+  &__tabs {
+    display: none;
   }
 }
 
@@ -30,6 +57,14 @@
   &:hover {
     background-color: $gray-300;
   }
+}
+
+.question-type {
+  padding: 10px 0;
+}
+
+.answer {
+  padding: 10px 0;
 }
 
 .spoiler {
