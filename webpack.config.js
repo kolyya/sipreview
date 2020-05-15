@@ -1,10 +1,12 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = env => {
     return {
         entry: {
             app: './src/app.ts',
         },
+        plugins: [new MiniCssExtractPlugin()],
         devtool: env.production ? undefined : 'inline-source-map',
         module: {
             rules: [
@@ -25,6 +27,9 @@ module.exports = env => {
                         {
                             // Adds CSS to the DOM by injecting a `<style>` tag
                             loader: 'style-loader'
+                        },
+                        {
+                            loader: MiniCssExtractPlugin.loader,
                         },
                         {
                             // Interprets `@import` and `url()` like `import/require()` and will resolve them
