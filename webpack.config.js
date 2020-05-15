@@ -2,13 +2,21 @@ const path = require('path');
 
 module.exports = env => {
     return {
-        entry: './src/app.ts',
+        entry: {
+            app: './src/app.ts',
+        },
         devtool: env.production ? undefined : 'inline-source-map',
         module: {
             rules: [
                 {
                     test: /\.tsx?$/,
-                    use: 'ts-loader',
+                    use: {
+                        loader: 'ts-loader',
+                        options: {
+                            transpileOnly: true,
+                            experimentalWatchApi: true,
+                        },
+                    },
                     exclude: /node_modules/,
                 },
                 {
@@ -47,6 +55,11 @@ module.exports = env => {
         output: {
             filename: 'app.js',
             path: path.resolve(__dirname, 'docs/build'),
+        },
+        optimization: {
+            removeAvailableModules: false,
+            removeEmptyChunks: false,
+            splitChunks: false,
         },
     };
 };

@@ -3,7 +3,7 @@
   "private": true,
   "main": "src/app.ts",
   "scripts": {
-    "build": "webpack --env.production",
+    "build": "webpack --env.production --mode=production",
     "watch": "webpack --env.development --watch"
   },
   "devDependencies": {
