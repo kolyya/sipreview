@@ -157,6 +157,14 @@ class ContentXml {
                             $('<audio>', {
                                 'src': 'data:audio/mp3;charset=utf-8;base64, ' + _this.options.get_data('Audio/' + encodeURI(html).substr(1)),
                                 'controls': true,
+                                'title': html,
+                            }).appendTo(_this.$gameQuestion);
+                        } else if ('video' === type) {
+                            $('<video>', {
+                                'src': 'data:video/mp4;charset=utf-8;base64, ' + _this.options.get_data('Video/' + encodeURI(html).substr(1)),
+                                'controls': true,
+                                'title': html,
+                                'width': '100%',
                             }).appendTo(_this.$gameQuestion);
                         } else {
                             $('<div>', {
